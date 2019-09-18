@@ -85,7 +85,9 @@
             background: #e8e8e88f;
             padding-top: 17px;
         }
-
+        .submenu-active{
+            background: #E4E7ED
+        }
         .icon-jblog-jiantou-left{
             display: inline-block;
             transition: transform .3s;
@@ -214,6 +216,11 @@
                 $(this).addClass('menu-active');
                 $(this).next('ul').slideToggle("slow").siblings(".dropdown_menu:visible").slideUp("slow");
             }
+        });
+        //选中侧边栏子项目
+        $('.dropdown_menu>li').click(function () {
+            $('.dropdown_menu').find('li').removeClass('submenu-active');
+            $(this).addClass('submenu-active');
         });
         //加载editor
         // var editor = editormd("test", {

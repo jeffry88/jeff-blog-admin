@@ -3,94 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/simple-sidebar.css">
+    <link rel="stylesheet" href="../static/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/vendor/editor.md/css/editormd.css"/>
+    <link rel="stylesheet" href="../static/css/icon-font/iconfont.css">
+    <script src="../static/css/icon-font/iconfont.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <style>
-        #slideout {
-            position: fixed;
-            top: 40px;
-            left: 0;
-            -webkit-transition-duration: 0.3s;
-            -moz-transition-duration: 0.3s;
-            -o-transition-duration: 0.3s;
-            transition-duration: 0.3s;
+
+        .icon-jblog-jiantou-left {
+            transition: transform .3s;
         }
-        #slideout_inner {
-            position: fixed;
-            top: 40px;
-            left: -250px;
-            -webkit-transition-duration: 0.3s;
-            -moz-transition-duration: 0.3s;
-            -o-transition-duration: 0.3s;
-            transition-duration: 0.3s;
+
+        .menu-hidden.icon-jblog-jiantou-left {
+            transform-origin: center center;
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
         }
-        #slideout:hover {
-            left: 250px;
-        }
-        #slideout:hover #slideout_inner {
-            left: 0;
-        }
-        img {
-            width:100px;
-            height:100px;
+
+        .test {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            top: 400px;
+            left: 400px;
         }
     </style>
 </head>
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header admin-header">
-        <div class="layui-logo">博客后台管理平台</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <div class="admin-nav">
-            <ul class="layui-nav">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                        jeffry
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                        <dd><a href="">退出</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="admin-main">
-        <div class="admin-side-nav">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="">
-                <li class="">
-                    <a class="" href="javascript:;">文章</a>
-                    <dl class="">
-                        <dd><a href="javascript:;">文章管理</a></dd>
-                        <dd><a href="javascript:;">专栏管理</a></dd>
-                        <dd><a href="javascript:;">文章分类</a></dd>
-                    </dl>
-                </li>
-                <li class="">
-                    <a href="javascript:;">消息通知</a>
-                    <dl class="">
-                        <dd><a href="javascript:;">留言信息</a></dd>
-                        <dd><a href="javascript:;">文章评论信息</a></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-        <div class="admin-body">
-            <!-- 内容主体区域 -->
-            <div class="edit-article" id="test">内容主体区域</div>
-        </div>
-    </div>
 
-    <div class="admin-footer">
-        <!-- 底部固定区域 -->
-        © dengdinghua.com - 博客后台管理系统
-    </div>
-</div>
 <body>
 
-<div id="slideout">
-    <img src="http://eduardovalencia.com/wp-content/uploads/2011/03/FEEDBACK-LOGO-PURPLE.jpg" alt="Feedback" />
-    <div id="slideout_inner">Hi Welcome to Stack Overflow</div>
+<div class="test">
+    <i class="iconfont icon-jblog-jiantou-left"></i>
 </div>
+
+
+<script src="../static/js/jquery-3.4.0.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../static/vendor/layui/layui.js"></script>
+<script src="../static/vendor/editor.md/editormd.min.js"></script>
+<script>
+    $('.test').click(function () {
+        if ($(this).find('i').hasClass('menu-hidden')) {
+            $(this).find('i').removeClass('menu-hidden')
+        } else {
+            $(this).find('i').addClass('menu-hidden')
+
+        }
+    });
+</script>
 </body>
 </html>
