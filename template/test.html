@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #slideout {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+        #slideout_inner {
+            position: fixed;
+            top: 40px;
+            left: -250px;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+        #slideout:hover {
+            left: 250px;
+        }
+        #slideout:hover #slideout_inner {
+            left: 0;
+        }
+        img {
+            width:100px;
+            height:100px;
+        }
+    </style>
+</head>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header admin-header">
+        <div class="layui-logo">博客后台管理平台</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <div class="admin-nav">
+            <ul class="layui-nav">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                        jeffry
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">基本资料</a></dd>
+                        <dd><a href="">安全设置</a></dd>
+                        <dd><a href="">退出</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="admin-main">
+        <div class="admin-side-nav">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="">
+                <li class="">
+                    <a class="" href="javascript:;">文章</a>
+                    <dl class="">
+                        <dd><a href="javascript:;">文章管理</a></dd>
+                        <dd><a href="javascript:;">专栏管理</a></dd>
+                        <dd><a href="javascript:;">文章分类</a></dd>
+                    </dl>
+                </li>
+                <li class="">
+                    <a href="javascript:;">消息通知</a>
+                    <dl class="">
+                        <dd><a href="javascript:;">留言信息</a></dd>
+                        <dd><a href="javascript:;">文章评论信息</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="admin-body">
+            <!-- 内容主体区域 -->
+            <div class="edit-article" id="test">内容主体区域</div>
+        </div>
+    </div>
+
+    <div class="admin-footer">
+        <!-- 底部固定区域 -->
+        © dengdinghua.com - 博客后台管理系统
+    </div>
+</div>
+<body>
+
+<div id="slideout">
+    <img src="http://eduardovalencia.com/wp-content/uploads/2011/03/FEEDBACK-LOGO-PURPLE.jpg" alt="Feedback" />
+    <div id="slideout_inner">Hi Welcome to Stack Overflow</div>
+</div>
+</body>
+</html>
