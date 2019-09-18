@@ -17,13 +17,6 @@
         }
 
         /*侧边栏*/
-        /*.dropdown_title {*/
-        /*display: block;*/
-        /*border-left-width: 4px;*/
-        /*border-left-style: solid;*/
-        /*border-left-color:  #f8f9fa;*/
-        /*}*/
-
         .dropdown_title:hover {
             border-left: solid 4px #1989fa;
             transition: all .3s;
@@ -74,7 +67,11 @@
         .dropdown_menu li {
             padding: 6px 5px 6px 60px;
         }
-        .dropdown_menu li:hover{background: #E4E7ED}
+
+        .dropdown_menu li:hover {
+            background: #E4E7ED
+        }
+
         .toggle-menu {
             width: 16px;
             height: 50px;
@@ -85,13 +82,16 @@
             background: #e8e8e88f;
             padding-top: 17px;
         }
-        .submenu-active{
+
+        .submenu-active {
             background: #E4E7ED
         }
-        .icon-jblog-jiantou-left{
+
+        .icon-jblog-jiantou-left {
             display: inline-block;
             transition: transform .3s;
         }
+
         .menu-hidden.icon-jblog-jiantou-left {
             transform-origin: center center;
             transform: rotate(180deg);
@@ -101,13 +101,27 @@
             -o-transform: rotate(180deg);
         }
 
+        .user-head {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+        }
 
+        @media (min-width: 992px) {
+            .message {
+                padding-top: .7rem;
+            }
+        }
+        .dropdown-menu{
+            font-size: .7rem;
+        }
+        .container-fluid{height:100%;}
     </style>
 </head>
 <body>
+<!-- wrapper -->
 <div class="d-flex" id="wrapper">
-
-    <!-- Sidebar -->
+    <!-- 左边栏 -->
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Jeffblog 管理后台</div>
         <div class="list-group list-group-flush">
@@ -120,7 +134,7 @@
                     </div>
                     <ul class="dropdown_menu">
                         <li>新建文章</li>
-                        <li>编辑文章</li>
+                        <li data-type="2">编辑文章</li>
                         <li>文章分类</li>
                     </ul>
                 </div>
@@ -139,13 +153,12 @@
             </div>
         </div>
     </div>
-    <!-- /#sidebar-wrapper -->
+    <!-- /#左边栏 -->
 
-    <!-- Page Content -->
+    <!-- 内容区 -->
     <div id="page-content-wrapper">
         <div class="toggle-menu" id="menu-toggle"><i class="iconfont icon-jblog-jiantou-left"></i></div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <!--<button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -154,12 +167,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">消息 <span class="sr-only">(current)</span></a>
+                        <a class="nav-link message" href="#">消息 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            <img class="user-head" src="../static/images/user_head.jpg">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">个人中心</a>
@@ -172,12 +185,15 @@
                 </ul>
             </div>
         </nav>
-
+        <!--显示区-->
         <div class="container-fluid">
-
+            <div class="content-body">
+                <h3>博客后台管理系统</h3>
+            </div>
         </div>
+        <!-- /#显示区-->
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#内容区-->
 
 </div>
 <!-- /#wrapper -->
@@ -221,15 +237,13 @@
         $('.dropdown_menu>li').click(function () {
             $('.dropdown_menu').find('li').removeClass('submenu-active');
             $(this).addClass('submenu-active');
+            if ($(this).data('type') == 2)
+            {
+                console.log('test');
+                article_edit();
+            }
         });
-        //加载editor
-        // var editor = editormd("test", {
-        //     width: "100%",
-        //     height: "100%",
-        //     markdown: "编辑文章",     // dynamic set Markdown text
-        //     path : "../static/editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
-        // });
-        get_test()
+        // get_test()
     });
 
     function get_test() {
@@ -252,6 +266,18 @@
 
         });
     }
+
+    //编辑文章
+    function article_edit() {
+        $(".container-fluid").html("<div id=\"test-editormd\"></div>");
+        var editor = editormd("test-editormd", {
+            width: "100%",
+            height: "100%",
+            markdown: "编辑文章",     // dynamic set Markdown text
+            path : "../static/vendor/editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+        });
+    }
+
 </script>
 
 </body>
