@@ -15,7 +15,13 @@
         .navbar {
             justify-content: flex-end;
         }
-
+        li a{
+            text-decoration:none;
+        }
+        li a:hover{
+            text-decoration:none;
+            color: #212529;
+        }
         /*侧边栏*/
         .dropdown_title:hover {
             border-left: solid 4px #1989fa;
@@ -122,7 +128,25 @@
             height:92%;
             padding-top:15px;
             padding-bottom: 15px;
+            padding-left:20px;
         }
+        /*新建文章*/
+        .title-head{
+            margin-top:10px;
+        }
+        .title-input{
+            display: inline-block;
+            width:80%;
+        }
+        .title-label{
+            margin-left:25px;
+        }
+        .jeff-button{
+            margin-left:25px;
+        }
+        /*.add-article-body{*/
+            /*height:88%;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -140,8 +164,8 @@
                         <i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
                     </div>
                     <ul class="dropdown_menu">
-                        <li>新建文章</li>
-                        <li data-type="2">编辑文章</li>
+                        <li><a href="#/add_article">新建文章</a></li>
+                        <li data-type="2"><a href="#/edit_article">编辑文章</a></li>
                         <li>文章分类</li>
                     </ul>
                 </div>
@@ -195,7 +219,15 @@
         <!--显示区-->
         <div class="container-fluid">
             <div class="content-body">
-                <h3>博客后台管理系统</h3>
+                <!--<h3>博客后台管理系统</h3>-->
+                <div class="layui-form-item title-head">
+                    <label class="layui-form-label title-label">标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input title-input">
+                        <button type="button" class="layui-btn jeff-button">发布</button>
+                    </div>
+                </div>
+                <div class="add-article-body" id="add_article_body"></div>
             </div>
         </div>
         <!-- /#显示区-->
@@ -206,11 +238,15 @@
 <!-- /#wrapper -->
 
 <script src="../static/js/jquery-3.4.0.min.js"></script>
+<script src="../static/js/RouterClass.js"></script>
 <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../static/vendor/layui/layui.js"></script>
 <script src="../static/vendor/editor.md/editormd.min.js"></script>
 <script>
     $(function () {
+        // 初始化前端路由
+        init();
+
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
@@ -245,12 +281,32 @@
             $('.dropdown_menu').find('li').removeClass('submenu-active');
             $(this).addClass('submenu-active');
             if ($(this).data('type') == 2) {
-                article_edit();
             }
         });
         get_test()
     });
 
+    //初始化函数
+    function init() {
+        //初始化前端路由
+        RouterClass.init();
+        const BtnDom = document.querySelector('button')
+        const ContentDom = document.querySelector('.content-div')
+        const changeContent = content => ContentDom.innerHTML = content
+
+        Router.route('/', function () {
+            // $(".container-fluid").html(' <div class="content-body"><h3>博客后台管理系统</h3></div>');
+        });
+        Router.route('/add_article', function () {
+            $.getScript("../static/js/add-article.js",function () {
+                add_article();
+            });
+        });
+        Router.route('/edit_article',function () {
+            article_edit();
+        });
+
+    }
     function get_test() {
         $.ajax({
             type: 'GET',
@@ -271,7 +327,6 @@
 
         });
     }
-
     //编辑文章
     function article_edit() {
         $(".container-fluid").html("<div id=\"test-editormd\"></div>");

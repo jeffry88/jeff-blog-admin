@@ -32,21 +32,55 @@
             top: 400px;
             left: 400px;
         }
+
+        .content-main {
+            padding: 30px;
+        }
     </style>
 </head>
 
 <body>
 
-<div class="test">
-    <i class="iconfont icon-jblog-jiantou-left"></i>
+<div class="content-main">
+    <div class="test">
+        <i class="iconfont icon-jblog-jiantou-left"></i>
+    </div>
+    <ul>
+        <li><a href="#/">/</a></li>
+        <li><a href="#/page1">page1</a></li>
+        <li><a href="#/page2">page2</a></li>
+    </ul>
+    <div class='content-div'></div>
+
+    <button>back</button>
 </div>
 
 
 <script src="../static/js/jquery-3.4.0.min.js"></script>
+<script src="../static/js/RouterClass.js"></script>
 <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../static/vendor/layui/layui.js"></script>
 <script src="../static/vendor/editor.md/editormd.min.js"></script>
 <script>
+    $(function () {
+
+        RouterClass.init();
+        const BtnDom = document.querySelector('button');
+        const ContentDom = document.querySelector('.content-div');
+        const changeContent = content => ContentDom.innerHTML = content;
+
+        Router.route('/', function () {
+            
+        });
+        Router.route('/page1', function () {
+            
+        });
+        Router.route('/page2',function () {
+
+        });
+
+        BtnDom.addEventListener('click', Router.back.bind(Router), false)
+    });
     $('.test').click(function () {
         if ($(this).find('i').hasClass('menu-hidden')) {
             $(this).find('i').removeClass('menu-hidden')
