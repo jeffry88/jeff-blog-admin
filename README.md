@@ -4,4 +4,4 @@
 VERSION = "0.1.1"
 
 ###系统界面预览
-![image](https://github.com/jeffry88/jeff-blog-admin/tree/master/static/images/view.png)
+![image](https://github.com/jeffry88/jeff-blog-admin/blob/master/static/images/view.png)
