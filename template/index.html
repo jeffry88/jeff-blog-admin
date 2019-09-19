@@ -112,10 +112,17 @@
                 padding-top: .7rem;
             }
         }
-        .dropdown-menu{
+
+        .dropdown-menu {
             font-size: .7rem;
         }
-        .container-fluid{height:100%;}
+
+        .container-fluid {
+            min-height: 650px;
+            height:92%;
+            padding-top:15px;
+            padding-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -237,13 +244,11 @@
         $('.dropdown_menu>li').click(function () {
             $('.dropdown_menu').find('li').removeClass('submenu-active');
             $(this).addClass('submenu-active');
-            if ($(this).data('type') == 2)
-            {
-                console.log('test');
+            if ($(this).data('type') == 2) {
                 article_edit();
             }
         });
-        // get_test()
+        get_test()
     });
 
     function get_test() {
@@ -272,9 +277,12 @@
         $(".container-fluid").html("<div id=\"test-editormd\"></div>");
         var editor = editormd("test-editormd", {
             width: "100%",
-            height: "100%",
+            height:"100%",
+            // autoHeight : true,
             markdown: "编辑文章",     // dynamic set Markdown text
-            path : "../static/vendor/editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+            path: "../static/vendor/editor.md/lib/" , // Autoload modules mode, codemirror, marked... dependents libs path,
+            imageUpload : true,
+            imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ]
         });
     }
 
