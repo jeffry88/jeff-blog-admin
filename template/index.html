@@ -15,6 +15,7 @@
         .navbar {
             justify-content: flex-end;
         }
+        .sidebar-heading a{text-decoration:none;}
         li a{
             text-decoration:none;
         }
@@ -154,7 +155,7 @@
 <div class="d-flex" id="wrapper">
     <!-- 左边栏 -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Jeffblog 管理后台</div>
+        <div class="sidebar-heading"><a href="#/">Jeffblog 管理后台</a></div>
         <div class="list-group list-group-flush">
             <div class="dropdown">
                 <div class="sidebar-menu">
@@ -166,7 +167,7 @@
                     <ul class="dropdown_menu">
                         <li><a href="#/add_article">新建文章</a></li>
                         <li data-type="2"><a href="#/edit_article">编辑文章</a></li>
-                        <li>文章分类</li>
+                        <li><a href="#/article_classification">文章分类</a></li>
                     </ul>
                 </div>
                 <div class="sidebar-menu">
@@ -242,75 +243,75 @@
 <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../static/vendor/layui/layui.js"></script>
 <script src="../static/vendor/editor.md/editormd.min.js"></script>
+<script src="../static/js/article.js"></script>
 <script>
     $(function () {
         // 初始化前端路由
         init();
+    }).on('click','#menu-toggle',function (e)
+    {//点击收起打开侧边栏
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        if ($(this).find('i').hasClass('menu-hidden')) {
+            $(this).find('i').removeClass('menu-hidden')
+        } else {
+            $(this).find('i').addClass('menu-hidden')
 
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-            if ($(this).find('i').hasClass('menu-hidden')) {
-                $(this).find('i').removeClass('menu-hidden')
-            } else {
-                $(this).find('i').addClass('menu-hidden')
-
+        }
+    }).on('click','.dropdown_title',function ()
+    {//点击侧边栏顶级菜单
+        if ($(".dropdown").length != 0) {
+            if ($(this).children().last().hasClass('nav-show')) {
+                $(this).children().last().removeClass('nav-show');
             }
-        });
-        //JavaScript代码区域
-        layui.use('element', function () {
-            var element = layui.element;
-
-        });
-        //点击侧边栏功能
-        $('.dropdown_title').click(function () {
-            if ($(".dropdown").length != 0) {
-                if ($(this).children().last().hasClass('nav-show')) {
-                    $(this).children().last().removeClass('nav-show');
-                }
-                else {
-                    $(this).children().last().addClass('nav-show');
-                }
-                $('.dropdown_title').removeClass('menu-active');
-                $(this).addClass('menu-active');
-                $(this).next('ul').slideToggle("slow").siblings(".dropdown_menu:visible").slideUp("slow");
+            else {
+                $(this).children().last().addClass('nav-show');
             }
-        });
-        //选中侧边栏子项目
-        $('.dropdown_menu>li').click(function () {
-            $('.dropdown_menu').find('li').removeClass('submenu-active');
-            $(this).addClass('submenu-active');
-            if ($(this).data('type') == 2) {
-            }
-        });
-        // get_test()
+            $('.dropdown_title').removeClass('menu-active');
+            $(this).addClass('menu-active');
+            $(this).next('ul').slideToggle("slow").siblings(".dropdown_menu:visible").slideUp("slow");
+            console.log('test');
+        }
+    }).on('click','.dropdown_menu>li',function ()
+    {//点击二级菜单
+        if ($(this).hasClass('submenu-active'))
+        {
+            return false;
+        }
+        $('.dropdown_menu').find('li').removeClass('submenu-active');
+        $(this).addClass('submenu-active');
+        if ($(this).data('type') == 2) {
+        }
     });
 
     //初始化函数
     function init() {
+        //引入layui
+        layui.use('element', function () {
+            var element = layui.element;
+
+        });
         //初始化前端路由
         RouterClass.init();
-        const BtnDom = document.querySelector('button');
-        const ContentDom = document.querySelector('.content-div');
-        const changeContent = content => ContentDom.innerHTML = content;
-
         Router.route('/', function () {
-            // $(".container-fluid").html(' <div class="content-body"><h3>博客后台管理系统</h3></div>');
+            $(".container-fluid").html(' <div class="content-body"><h3>博客后台管理系统</h3></div>');
         });
         Router.route('/add_article', function () {
-            $.getScript("../static/js/add-article.js",function () {
+            console.log('555');
                 add_article();
-            });
         });
         Router.route('/edit_article',function () {
             article_edit();
+        });
+        Router.route('/article_classification',function () {
+
         });
 
     }
     function get_test() {
         $.ajax({
             type: 'GET',
-            url: "",
+            url: " https://easy-mock.com/mock/5d81a579229be747d294db83/www.dengdinghau.com/admin/getAdmin",
             contentType: 'application/json',
             data: {uid: 100001},
             dataType: 'json',
@@ -325,19 +326,6 @@
                 console.log(obj);
             }
 
-        });
-    }
-    //编辑文章
-    function article_edit() {
-        $(".container-fluid").html("<div id=\"test-editormd\"></div>");
-        var editor = editormd("test-editormd", {
-            width: "100%",
-            height:"100%",
-            // autoHeight : true,
-            markdown: "编辑文章",     // dynamic set Markdown text
-            path: "../static/vendor/editor.md/lib/" , // Autoload modules mode, codemirror, marked... dependents libs path,
-            imageUpload : true,
-            imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ]
         });
     }
 
