@@ -283,16 +283,16 @@
             if ($(this).data('type') == 2) {
             }
         });
-        get_test()
+        // get_test()
     });
 
     //初始化函数
     function init() {
         //初始化前端路由
         RouterClass.init();
-        const BtnDom = document.querySelector('button')
-        const ContentDom = document.querySelector('.content-div')
-        const changeContent = content => ContentDom.innerHTML = content
+        const BtnDom = document.querySelector('button');
+        const ContentDom = document.querySelector('.content-div');
+        const changeContent = content => ContentDom.innerHTML = content;
 
         Router.route('/', function () {
             // $(".container-fluid").html(' <div class="content-body"><h3>博客后台管理系统</h3></div>');
@@ -310,7 +310,7 @@
     function get_test() {
         $.ajax({
             type: 'GET',
-            url: " https://easy-mock.com/mock/5d81a579229be747d294db83/www.dengdinghau.com/admin/getAdmin",
+            url: "",
             contentType: 'application/json',
             data: {uid: 100001},
             dataType: 'json',
