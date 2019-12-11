@@ -24,3 +24,16 @@ function add_article() {
         imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ]
     });
 }
+
+//编辑文章
+function article_edit() {
+    $(".container-fluid").html("<div id=\"test-editormd\"></div>");
+    var editor = editormd("test-editormd", {
+        width: "100%",
+        height:"100%",
+        markdown: "编辑文章",     // dynamic set Markdown text
+        path: "../static/vendor/editor.md/lib/" , // Autoload modules mode, codemirror, marked... dependents libs path,
+        imageUpload : true,
+        imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ]
+    });
+}
