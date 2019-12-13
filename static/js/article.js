@@ -37,3 +37,7 @@ function article_edit() {
         imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ]
     });
 }
+//编辑分类
+function article_classification() {
+    $(".container-fluid").html("article_classification");
+}
