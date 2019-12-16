@@ -133,6 +133,7 @@
             padding-bottom: 15px;
             padding-left:20px;
         }
+        .content-body{height: 100%;}
         /*新建文章*/
         .title-head{
             margin-top:10px;
@@ -150,6 +151,22 @@
         /*.add-article-body{*/
             /*height:88%;*/
         /*}*/
+
+        /*用户管理*/
+        .create-user{
+            width: 100%;
+            padding: 50px 200px;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 110px;
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+        }
+        .operator-btn-div{display: flex;justify-content: space-evenly;}
     </style>
 </head>
 <body>
@@ -162,9 +179,7 @@
             <div class="dropdown">
                 <div class="sidebar-menu">
                     <div class="dropdown_title list-group-item bg-light">
-                        <i class="iconfont icon-jblog-setup"></i>
-                        文章管理
-                        <i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
+                        <i class="iconfont icon-jblog-setup"></i>文章管理<i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
                     </div>
                     <ul class="dropdown_menu">
                         <li><a href="#/add_article">新建文章</a></li>
@@ -174,14 +189,21 @@
                 </div>
                 <div class="sidebar-menu">
                     <div class="dropdown_title list-group-item bg-light">
-                        <i class="iconfont icon-jblog-comment"></i>
-                        评论
-                        <i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
+                        <i class="iconfont icon-jblog-comment"></i>评论<i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
                     </div>
                     <ul class="dropdown_menu">
-                        <li>我的评论</li>
-                        <li>新消息</li>
-                        <li>@我的</li>
+                        <li><a href="#/">我的评论</a></li>
+                        <li><a href="#/">新消息</a></li>
+                        <li><a href="#/">@我的</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-menu">
+                    <div class="dropdown_title list-group-item bg-light">
+                        <i class="iconfont icon-jblog-user"></i>用户管理<i class="iconfont sidebar-arrow icon-jblog-jiantou-right"></i>
+                    </div>
+                    <ul class="dropdown_menu">
+                        <li><a href="#/add_user">创建用户</a></li>
+                        <li><a href="#/">编辑用户</a></li>
                     </ul>
                 </div>
             </div>
@@ -192,12 +214,12 @@
     <!-- 内容区 -->
     <div id="page-content-wrapper">
         <div class="toggle-menu" id="menu-toggle"><i class="iconfont icon-jblog-jiantou-left"></i></div>
+        <!--顶部-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item">
@@ -219,11 +241,11 @@
                 </ul>
             </div>
         </nav>
+        <!--顶部end-->
         <!--显示区-->
         <div class="container-fluid" id="container_fluid">
-            <div class="content-body">
-                <h3>博客后台管理系统</h3>
-            </div>
+            <div class="head-crumbs">用户管理 > 创建用户</div>
+            <div class="content-body" id="content_body"></div>
         </div>
         <!-- /#显示区-->
     </div>
@@ -231,13 +253,13 @@
 
 </div>
 <!-- /#wrapper -->
-
 <script src="../static/js/jquery-3.4.0.min.js"></script>
 <script src="../static/js/Routers.js"></script>
 <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../static/vendor/layui/layui.js"></script>
 <script src="../static/vendor/editor.md/editormd.min.js"></script>
 <script src="../static/js/article.js"></script>
+<script src="../static/js/user.js"></script>
 <script>
     $(function () {
         // 初始化前端路由
@@ -264,7 +286,6 @@
             $('.dropdown_title').removeClass('menu-active');
             $(this).addClass('menu-active');
             $(this).next('ul').slideToggle("slow").siblings(".dropdown_menu:visible").slideUp("slow");
-            console.log('test');
         }
     }).on('click','.dropdown_menu>li',function ()
     {//点击二级菜单
@@ -272,6 +293,8 @@
         {
             return false;
         }
+        $('.sidebar-menu').find('.dropdown_title').removeClass('menu-active');
+        $(this).parents('.sidebar-menu').find('.dropdown_title').addClass('menu-active');
         $('.dropdown_menu').find('li').removeClass('submenu-active');
         $(this).addClass('submenu-active');
         if ($(this).data('type') == 2) {
@@ -281,16 +304,20 @@
     //初始化函数
     function init() {
         //引入layui
-        layui.use('element', function () {
-            var element = layui.element;
-
+        layui.use(['element','form'], function () {
+            var element = layui.element,
+                form = layui.form;
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
         });
-
     }
     function get_test() {
         $.ajax({
             type: 'GET',
-            url: " https://easy-mock.com/mock/5d81a579229be747d294db83/www.dengdinghau.com/admin/getAdmin",
+            url: "",
             contentType: 'application/json',
             data: {uid: 100001},
             dataType: 'json',

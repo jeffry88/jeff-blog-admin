@@ -6,13 +6,13 @@ window.addEventListener('hashchange', onHashChange);
 // 路由视图
 var routerView = null;
 
-function onLoad () {
-    routerView = document.querySelector('#container_fluid');
+function onLoad() {
+    routerView = document.querySelector('#content_body');
     onHashChange();
 }
 
-// 路由变化时，根据路由渲染对应 UI
-function onHashChange () {
+// 配置路由，路由变化时，根据路由渲染对应 UI
+function onHashChange() {
     switch (location.hash) {
         case '#/':
             routerView.innerHTML = '<div class="content-body"><h3>博客后台管理系统</h3></div>';
@@ -25,6 +25,9 @@ function onHashChange () {
             break;
         case '#/article_classification':
             routerView.innerHTML = 'article_classification';
+            break;
+        case '#/add_user':
+            create_user();
             break;
         default:
             break;

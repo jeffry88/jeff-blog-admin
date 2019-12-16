@@ -11,7 +11,7 @@ function add_article() {
     '    </div>'+
     '</div>'+
     '<div class="add-article-body" id="add_article_body"></div>';
-    $(".container-fluid").html(title_html);
+    $("#content_body").html(title_html);
 
 
     var article_add_editor = editormd("add_article_body", {
@@ -27,7 +27,7 @@ function add_article() {
 
 //编辑文章
 function article_edit() {
-    $(".container-fluid").html("<div id=\"test-editormd\"></div>");
+    $("#content_body").html("<div id=\"test-editormd\"></div>");
     var editor = editormd("test-editormd", {
         width: "100%",
         height:"100%",
@@ -39,5 +39,5 @@ function article_edit() {
 }
 //编辑分类
 function article_classification() {
-    $(".container-fluid").html("article_classification");
+    $("#content_body").html("article_classification");
 }
